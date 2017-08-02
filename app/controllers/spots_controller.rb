@@ -17,6 +17,16 @@ class SpotsController < ApplicationController
     end
   end
 
-  
+  post '/spots' do
+     if params[:content] == ""
+       redirect to '/spots/new'
+     else
+       @spot = Spot.create(content: params[:content], user_id: session[:user_id])
+       redirect to "/spots"
+     end
+  end
+
+
+
 
 end
