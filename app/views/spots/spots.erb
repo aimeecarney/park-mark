@@ -5,11 +5,8 @@
 <h2>Spots:</h2>
 <% @spots.each do |spot| %>
   Date: <%= spot.date %> <br>
-  Time: <%= spot.time %> <br>
-  Address: <%= spot.address %> <br>
-  Floor: <%= spot.floor %> <br>
-  Section: <%= spot.section %> <br>
-  Row: <%= spot.row %> <br>
-  Spot: <%= spot.spot %> <br>
-  Note: <%= spot.note %> <br>
+  Name: <%= spot.name %> <br>
+  <a href="/spots/<%=spot.id%>">View</a><br><br>
+
+
   <% end %>
