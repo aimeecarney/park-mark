@@ -35,32 +35,40 @@ class SpotsController < ApplicationController
     end
   end
 
-  get '/tweets/:id/edit' do
+  get '/spots/:id/edit' do
     if logged_in?
-      @tweet = Tweet.find_by_id(params[:id])
-        erb :'/tweets/edit_tweet'
+      @spot = Spot.find_by_id(params[:id])
+        erb :'/spots/edit_spot'
       else
       redirect to '/login'
     end
   end
 
-  patch '/tweets/:id' do
+  patch '/spots/:id' do
     if params[:content] == ""
-      redirect to "/tweets/#{params[:id]}/edit"
+      redirect to "/spots/#{params[:id]}/edit"
     else
-      @tweet = Tweet.find_by_id(params[:id])
-      @tweet.content = params[:content]
-      @tweet.save
-      redirect to "/tweets/#{@tweet.id}"
+      @spot = Spot.find_by_id(params[:id])
+      @spot.name = params[:name]
+      @spot.date = params[:date]
+      @spot.time = params[:time]
+      @spot.address = params[:address]
+      @spot.floor = params[:floor]
+      @spot.section = params[:section]
+      @spot.row = params [:row]
+      @spot.spot = params[:spot]
+      @spot.note = params[:note]
+      @spot.save
+      redirect to "/spots/<%=@spot.id%>"
     end
   end
 
-  delete '/tweets/:id' do
+  delete '/spots/:id' do
     if logged_in?
-      @tweet = Tweet.find_by_id(params[:id])
-      if @tweet.user_id == current_user.id
-        @tweet.delete
-        redirect to '/tweets'
+      @spot = Spot.find_by_id(params[:id])
+      if @spot.user_id == current_user.id
+        @spot.delete
+        redirect to '/spots'
       end
       redirect to '/login'
     end
