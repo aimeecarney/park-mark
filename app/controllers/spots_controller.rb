@@ -59,7 +59,7 @@ class SpotsController < ApplicationController
       @spot.spot = params[:spot]
       @spot.note = params[:note]
       @spot.save
-      redirect to "/spots/<%=@spot.id%>"
+      redirect to "/spots/#{params[:id]}"
     end
   end
 
