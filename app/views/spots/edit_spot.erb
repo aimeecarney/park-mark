@@ -1,5 +1,18 @@
 <h1>Edit Spot: "<%=@spot.name%>"</h1>
 
+Name: <%=@spot.name%><br>
+Date: <%= @spot.date %> <br>
+Time: <%= @spot.time %> <br>
+Address: <%= @spot.address %> <br>
+Floor: <%= @spot.floor %> <br>
+Section: <%= @spot.section %> <br>
+Row: <%= @spot.row %> <br>
+Spot: <%= @spot.spot %> <br>
+Note: <%= @spot.note %> <br>
+<br>
+<br>
+<h2>Edit Spot Form</h2><br>
+
   <form action="/spots/<%=@spot.id%>" method="POST">
     Name: <input type="text" name="name" id="name"><br>
     Date: <input type="text" name="date" id="date"><br>

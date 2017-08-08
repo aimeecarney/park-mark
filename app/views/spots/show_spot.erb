@@ -8,5 +8,8 @@ Section: <%= @spot.section %> <br>
 Row: <%= @spot.row %> <br>
 Spot: <%= @spot.spot %> <br>
 Note: <%= @spot.note %> <br>
-<br>
-<a href="/spots/<%=@spot.id%>/edit">Edit</a> | <a href="">Delete</a>
+<a href="/spots/<%=@spot.id%>/edit">Edit</a><br><br>
+<form method="post" action="/spots/<%=@spot.id%>">
+   <input id="hidden" type="hidden" name="_method" value="delete">
+   <input type="submit" value="Delete Spot">
+ </form>

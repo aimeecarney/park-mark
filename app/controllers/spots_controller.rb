@@ -1,3 +1,5 @@
+require 'pry'
+
 class SpotsController < ApplicationController
 
   get '/spots' do
@@ -44,7 +46,7 @@ class SpotsController < ApplicationController
     end
   end
 
-  patch '/spots/:id' do
+  post '/spots/:id' do
     if params[:content] == ""
       redirect to "/spots/#{params[:id]}/edit"
     else
@@ -55,11 +57,11 @@ class SpotsController < ApplicationController
       @spot.address = params[:address]
       @spot.floor = params[:floor]
       @spot.section = params[:section]
-      @spot.row = params [:row]
+      @spot.row = params[:row]
       @spot.spot = params[:spot]
       @spot.note = params[:note]
       @spot.save
-      redirect to "/spots/#{params[:id]}"
+      redirect to "/spots"
     end
   end
 
