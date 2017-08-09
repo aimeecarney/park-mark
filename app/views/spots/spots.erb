@@ -1,11 +1,11 @@
-<h1>Welcome!</h1>
+<h1>Welcome <%= current_user.username.capitalize%>!</h1>
 
 <h3><a href="/spots/new">Create a new spot</a> | <a href="/logout">Logout</a></h3>
 
 <h2>Spots:</h2>
 <% @spots.each do |spot| %>
-  Date: <%= spot.date %> <br>
   Spot Name: <%= spot.name %> <br>
+  Date: <%= spot.date %> <br>
   <a href="/spots/<%=spot.id%>">View</a><br><br>
 
   <% end %>

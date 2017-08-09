@@ -1,4 +1,4 @@
-<h1>Spot: <%=@spot.name%></h1>
+<h2>Spot Name: <%=@spot.name%></h2>
 
 Date: <%= @spot.date %> <br>
 Time: <%= @spot.time %> <br>
@@ -8,7 +8,7 @@ Section: <%= @spot.section %> <br>
 Row: <%= @spot.row %> <br>
 Spot Number: <%= @spot.spot %> <br>
 Note: <%= @spot.note %> <br>
-<a href="/spots/<%=@spot.id%>/edit">Edit</a><br>
+<a href="/spots/<%=@spot.id%>/edit">Edit Spot</a><br><br>
 <form method="post" action="/spots/<%=@spot.id%>/delete">
    <input id="hidden" type="hidden" name="_method" value="delete">
    <input type="submit" value="Delete Spot">
