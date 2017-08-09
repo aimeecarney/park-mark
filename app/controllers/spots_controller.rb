@@ -4,7 +4,7 @@ class SpotsController < ApplicationController
 
   get '/spots' do
     if logged_in?
-      @spots = Spot.all
+      @spots = current_user.spots
       erb :'spots/spots'
     else
       redirect to '/users/login'
@@ -20,7 +20,7 @@ class SpotsController < ApplicationController
   end
 
   post '/spots' do
-     if params[:content] == ""
+     if params[:name] == "" || params[:date] == "" || params[:time] == "" || params[:address] == "" || params[:floor] == "" || params[:section] == "" || params[:row] == "" || params[:spot] == ""
        redirect to '/spots/new'
      else
        @spot = Spot.create(name: params[:name], date: params[:date], time: params[:time], address: params[:address], floor: params[:floor], section: params[:section], row: params[:row], spot: params[:spot], note: params[:note], user_id: session[:user_id])
@@ -47,7 +47,7 @@ class SpotsController < ApplicationController
   end
 
   post '/spots/:id' do
-    if params[:content] == ""
+    if params[:name] == "" || params[:date] == "" || params[:time] == "" || params[:address] == "" || params[:floor] == "" || params[:section] == "" || params[:row] == "" || params[:spot] == ""
       redirect to "/spots/#{params[:id]}/edit"
     else
       @spot = Spot.find_by_id(params[:id])
