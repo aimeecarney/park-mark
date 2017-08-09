@@ -65,16 +65,16 @@ class SpotsController < ApplicationController
     end
   end
 
-  delete '/spots/:id' do
-    if logged_in?
-      @spot = Spot.find_by_id(params[:id])
-      if @spot.user_id == current_user.id
-        @spot.delete
-        redirect to '/spots'
+  post '/spots/:id/delete' do
+      if logged_in?
+        @spot = Spot.find_by_id(params[:id])
+        if @spot.user_id == current_user.id
+          @spot.delete
+          redirect to '/spots'
+        end
+        redirect to '/login'
       end
-      redirect to '/login'
     end
-  end
 
 
 end
