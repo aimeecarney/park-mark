@@ -14,6 +14,7 @@ Note: <%= @spot.note %> <br>
 <h2>Edit Spot Form</h2><br>
 
   <form action="/spots/<%=@spot.id%>" method="POST">
+    <input type="hidden" name="_method" value="patch" />
     Name: <input type="text" name="name" id="name"><br>
     Date: <input type="text" name="date" id="date"><br>
     Time: <input type="text" name="time" id="time"><br>

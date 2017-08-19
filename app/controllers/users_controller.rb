@@ -11,13 +11,12 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if params[:username] == "" || params[:password] == "" || params[:email] == ""
-      redirect '/signup'
-    else
-      user = User.new(email: params[:email], username: params[:username], password: params[:password])
-      user.save
+    user = User.new(params[:user])
+    if user.save
       session[:user_id] = user.id
       redirect '/spots'
+    else
+      erb :'users/create_user'
     end
   end
 

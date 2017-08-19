@@ -20,11 +20,11 @@ class SpotsController < ApplicationController
   end
 
   post '/spots' do
-     if params[:name] == "" || params[:date] == "" || params[:time] == "" || params[:address] == "" || params[:floor] == "" || params[:section] == "" || params[:row] == "" || params[:spot] == ""
-       redirect to '/spots/new'
-     else
-       @spot = Spot.create(name: params[:name], date: params[:date], time: params[:time], address: params[:address], floor: params[:floor], section: params[:section], row: params[:row], spot: params[:spot], note: params[:note], user_id: session[:user_id])
+     @spot = current_user.spots.build(params[:spot])
+     if @spot.save
        redirect to "/spots"
+     else
+       erb :'/spots/create_spot'
      end
   end
 
@@ -46,35 +46,31 @@ class SpotsController < ApplicationController
     end
   end
 
-  post '/spots/:id' do
-    if params[:name] == "" || params[:date] == "" || params[:time] == "" || params[:address] == "" || params[:floor] == "" || params[:section] == "" || params[:row] == "" || params[:spot] == ""
-      redirect to "/spots/#{params[:id]}/edit"
+  patch '/spots/:id' do
+    if logged_in?
+      if @spot = current_user.spots.find_by_id(params[:id])
+        if @spot.update(params)
+          redirect to "/spots"
+        else
+          erb :'/spots/edit_spot'
+        end
+      else
+        redirect '/spots'
+      end
     else
-      @spot = Spot.find_by_id(params[:id])
-      @spot.name = params[:name]
-      @spot.date = params[:date]
-      @spot.time = params[:time]
-      @spot.address = params[:address]
-      @spot.floor = params[:floor]
-      @spot.section = params[:section]
-      @spot.row = params[:row]
-      @spot.spot = params[:spot]
-      @spot.note = params[:note]
-      @spot.save
-      redirect to "/spots"
+      redirect '/login'
     end
   end
 
-  post '/spots/:id/delete' do
-      if logged_in?
-        @spot = Spot.find_by_id(params[:id])
-        if @spot.user_id == current_user.id
-          @spot.delete
-          redirect to '/spots'
-        end
-        redirect to '/login'
+  delete '/spots/:id' do
+    if logged_in?
+      if @spot = Spot.find_by_id(params[:id]) && @spot.user_id == current_user.id
+        @spot.delete
       end
+      redirect to '/spots'
+    else
+      redirect to '/login'
     end
-
+  end
 
 end
